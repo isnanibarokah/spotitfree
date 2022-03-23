@@ -7,7 +7,7 @@ body {
 .boxPlaylist {
   width: 300px;
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   background-color: #cfdff1;
   box-shadow: 2px 2px 5px #a2b1c6;
   text-align: center;
@@ -15,7 +15,14 @@ body {
 
 .boxPlaylist img {
   width: 80%;
-  padding-top: 20px;
+}
+
+.boxPlaylist h3 {
+  margin-top: 10px;
+}
+
+.boxPlaylist p {
+  margin-top: 5px;
 }
 
 .btnSelect {
@@ -25,7 +32,7 @@ body {
   border-radius: 8px;
   background-color: #ffb6c1;
   box-shadow: 2px 2px 5px #a2b1c6;
-  color: black;
+  color: whitesmoke;
   font-size: 14px;
   font-family: "Nunito", sans-serif;
 }
