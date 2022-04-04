@@ -2,20 +2,40 @@ import React, { useEffect, useState } from "react";
 import Track from "../../components/track";
 import Searchbar from "../../components/searchbar";
 import config from "../../setup/config";
+import FormPlaylist from "../../components/formplaylist";
+import { getUserProfile } from "../../setup/fetchApi";
 
 export default function Home() {
   const [tracks, setTracks] = useState([]);
   const [accessToken, setAccessToken] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [selectedTrackURI, setSelectedTrackURI] = useState([]);
+  const [selectedTracks, setSelectedTracks] = useState([]);
+  const [user, setUser] = useState({});
   const [isSearch, setIsSearch] = useState(false);
+  
 
   
   useEffect(() => {
     const params = new URLSearchParams(window.location.hash);
-    const accessToken = params.get("#access_token");
-    setAccessToken(accessToken);
-    setIsAuthorized(accessToken !== null);
+    const accessTokenParams = params.get("#access_token");
+
+    if (accessTokenParams !== null) {
+      setAccessToken(accessTokenParams);
+      setIsAuthorized(accessTokenParams !== null);
+
+      const setUserProfile = async () => {
+        try {
+          const response = await getUserProfile(accessTokenParams);
+
+          setUser(response);
+        } catch (e) {
+          alert(e);
+        }
+      };
+
+      setUserProfile();
+    }
   }, []);
 
   
@@ -43,20 +63,15 @@ export default function Home() {
 
   const handleSuccessSearch = (searchTracks) => {
     setIsSearch(true);
-    const selectedTracks = filterSelectedTracks();
 
-    
-    const searchDistinctTracks = searchTracks.filter(
-      (track) => !selectedTrackURI.includes(track.uri)
+    const selectedSearchTracks = searchTracks.filter((data) =>
+      selectedTrackURI.includes(data.uri)
     );
 
-
-    setTracks([...selectedTracks, ...searchDistinctTracks]);
+    setTracks([...new Set([...selectedSearchTracks, ...searchTracks])]);
   };
 
   const clearSearch = () => {
-    const selectedTracks = filterSelectedTracks();
-
     setTracks(selectedTracks);
     setIsSearch(false);
   };
@@ -66,8 +81,10 @@ export default function Home() {
 
     if (selectedTrackURI.includes(uri)) {
       setSelectedTrackURI(selectedTrackURI.filter((item) => item !== uri));
+      setSelectedTracks(selectedTrackURI.filter((item) => item.uri !== uri));
     } else {
       setSelectedTrackURI([...selectedTrackURI, uri]);
+      setSelectedTracks([...selectedTracks, track]);
     }
   };
 
@@ -84,6 +101,15 @@ export default function Home() {
 
       {isAuthorized && (
         <>
+          <h1>Spotitfree</h1>
+          <FormPlaylist
+            accessToken={accessToken}
+            userId={user.id}
+            uris={selectedTrackURI}
+          />
+          <hr />
+
+
           <h1>Spotitfree Playlist</h1>
           <Searchbar
             accessToken={accessToken}
@@ -100,7 +126,8 @@ export default function Home() {
                 url={track.album.images[0].url}
                 title={track.name}
                 artist={track.artists[0].name}
-                toggleSelect={() => toggleSelect(track)}
+                select={selectedTrackURI.includes(track.uri)}
+                toggle={() => toggleSelect(track)}
               />
             ))}
           </div>
