@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { addTracksToPlaylist, createPlaylist } from "../../setup/fetchApi";
 
-export default function FormPlaylist({ accessToken, userId, uris }) {
+export default function FormPlaylist({ uris }) {
   const [playlist, setPlaylist] = useState({
-    title: "",
-    description: "",
+      title: "",
+      description: "",
   });
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  const userId = useSelector((state) => state.auth.user.id);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,21 +21,29 @@ export default function FormPlaylist({ accessToken, userId, uris }) {
 
     if (playlist.title.length > 10) {
       try {
-        const responsePlaylist = await createPlaylist(accessToken, userId, {
-          name: playlist.title,
-          description: playlist.description,
-        });
+          const responsePlaylist = await createPlaylist(
+              accessToken,
+              userId,
+              {
+                  name: playlist.title,
+                  description: playlist.description,
+              }
+          );
 
-        await addTracksToPlaylist(accessToken, responsePlaylist.id, uris);
+          await addTracksToPlaylist(
+            accessToken,
+            responsePlaylist.id,
+            uris
+        );
 
         setPlaylist({
           title: "",
           description: "",
         });
 
-        alert("Playlist created successfully!");
+          alert("Playlist created successfully!");
       } catch (e) {
-        alert(e);
+          alert(e);
       }
     } else {
       alert("Title must be at least 10 characters long.");

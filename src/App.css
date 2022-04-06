@@ -43,6 +43,11 @@ body {
   text-decoration: none;
 }
 
+.btn-login {
+  background-color: sandybrown;
+  color: rgb(14, 13, 13);
+}
+
 .btn-primary {
   background-color: sandybrown;
   color: rgb(14, 13, 13);
@@ -53,7 +58,7 @@ body {
   background-color: rgb(253, 189, 105);
   color: rgb(14, 13, 13);
   font-weight: 500;
-  width: 25%;
+  width: auto;
 }
 
 

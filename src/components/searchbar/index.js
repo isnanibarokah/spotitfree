@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import config from "../../setup/config";
+import { useSelector } from "react-redux";
+import { searchTrack } from "../../setup/fetchApi";
 
-export default function Searchbar({ accessToken, onSuccess, onClearSearch }) {
+export default function Searchbar({ onSuccess, onClearSearch }) {
   const [text, setText] = useState("");
+  const accessToken = useSelector((state) => state.auth.accessToken);
 
   const handleInput = (e) => {
     setText(e.target.value);
@@ -11,20 +13,10 @@ export default function Searchbar({ accessToken, onSuccess, onClearSearch }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const requestOptions = {
-      headers: {
-        Authorization: "Bearer " + accessToken,
-        "Content-Type": "application/json",
-      },
-    };
-
     try {
-      const response = await fetch(
-        `${config.SPOTIFY_BASE_URL}/search?type=track&q=${text}`,
-        requestOptions
-      ).then((data) => data.json());
+      const responseSearch = await searchTrack(text, accessToken);
 
-      const tracks = response.tracks.items;
+      const tracks = responseSearch.tracks.items;
       onSuccess(tracks);
     } catch (e) {
       alert(e);
