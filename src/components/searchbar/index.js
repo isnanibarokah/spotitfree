@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { searchTrack } from "../../setup/fetchApi";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { searchTrack } from '../../setup/fetchApi';
 
 export default function SearchBar({ onSuccess, onClearSearch }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const accessToken = useSelector((state) => state.auth.accessToken);
 
   const handleInput = (e) => {
@@ -24,7 +24,7 @@ export default function SearchBar({ onSuccess, onClearSearch }) {
   };
 
   const clearSearch = () => {
-    setText("");
+    setText('');
     onClearSearch();
   };
 

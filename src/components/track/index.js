@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export default function Track({ url, title, artist, select, toggle }) {
   const [isSelected, setIsSelected] = useState(select);
@@ -15,11 +15,11 @@ export default function Track({ url, title, artist, select, toggle }) {
       <p>{artist}</p>
       <button
         className={`btn btn-select ${
-          isSelected ? "btn-primary" : "btn-secondary"
+          isSelected ? 'btn-primary' : 'btn-secondary'
         }`}
         onClick={handleSelect}
       >
-        {isSelected ? "Deselect" : "Select"}
+        {isSelected ? 'Deselect' : 'Select'}
       </button>
     </div>
   );

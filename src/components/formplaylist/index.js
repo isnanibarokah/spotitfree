@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { addTracksToPlaylist, createPlaylist } from "../../setup/fetchApi";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { addTracksToPlaylist, createPlaylist } from '../../setup/fetchApi';
 
 export default function FormPlaylist({ uris }) {
   const [playlist, setPlaylist] = useState({
-      title: "",
-      description: "",
+    title: '',
+    description: '',
   });
   const accessToken = useSelector((state) => state.auth.accessToken);
   const userId = useSelector((state) => state.auth.user.id);
@@ -27,26 +27,26 @@ export default function FormPlaylist({ uris }) {
               {
                   name: playlist.title,
                   description: playlist.description,
-              }
+              },
           );
 
           await addTracksToPlaylist(
             accessToken,
             responsePlaylist.id,
-            uris
-        );
+            uris,
+          );
 
-        setPlaylist({
-          title: "",
-          description: "",
-        });
+          setPlaylist({
+            title: '',
+            description: '',
+          });
 
-          alert("Playlist created successfully!");
+          alert('Playlist created successfully!');
       } catch (e) {
           alert(e);
       }
     } else {
-      alert("Title must be at least 10 characters long.");
+      alert('Title must be at least 10 characters long.');
     }
   };
 
@@ -73,7 +73,7 @@ export default function FormPlaylist({ uris }) {
             value={playlist.description}
             onChange={handleChange}
             required
-          ></textarea>
+          />
         </div>
         <button className="btn btn-primary" type="submit">
           Submit
