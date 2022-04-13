@@ -11,8 +11,10 @@ export default function Track({ url, title, artist, select, toggle }) {
   return (
     <div className="box-Playlist">
       <img src={url} alt="Track Playlist" />
-      <h3>{title}</h3>
-      <p>{artist}</p>
+      <div className="box-info">
+        <h3>{title}</h3>
+        <p>{artist}</p>
+      </div>
       <button
         className={`btn btn-select ${
           isSelected ? 'btn-primary' : 'btn-secondary'

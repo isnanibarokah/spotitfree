@@ -131,26 +131,30 @@ hr {
   text-align: center;
 }
 
+.box-Playlist .box-info {
+  display: flex;
+  flex-direction: column;
+}
+
 .box-Playlist img {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-.box-Playlist h3 {
+.box-info h3 {
   font-weight: 600;
   min-height: 60px;
 }
 
-.box-Playlist p {
+.box-info p {
   margin-top: 5px;
 }
 
 .track-list {
   display: grid;
-  justify-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 20px;
+  grid-gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   margin: 20px 0;
 }
 
