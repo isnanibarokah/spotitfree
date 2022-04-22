@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { TRootState } from '../../store';
+import { RootState, useAppSelector } from '../../redux/store';
 import { searchTrack } from '../../setup/fetchApi';
+import { Track as ITrack } from '../../types/spotify';
 
-interface Props {
-  onSuccess: (tracks: any[]) => void;
+interface IProps {
+  onSuccess: (tracks: ITrack[]) => void;
   onClearSearch: () => void;
 }
 
-const SearchBar: React.FC<Props> = ({ onSuccess, onClearSearch }) => {
+const SearchBar: React.FC<IProps> = ({ onSuccess, onClearSearch }) => {
   const [text, setText] = useState<string>('');
-  const accessToken: string = useSelector(
-    (state: TRootState) => state.auth.accessToken
+  const accessToken: string = useAppSelector(
+    (state: RootState) => state.auth.accessToken
   );
 
   const handleInput = (e: React.ChangeEvent) => {
@@ -45,14 +45,21 @@ const SearchBar: React.FC<Props> = ({ onSuccess, onClearSearch }) => {
             type="text"
             name="query"
             placeholder="Search..."
+            aria-label="search-input"
             onChange={handleInput}
-            required
             value={text}
+            required
           />
-          <button className="btn btn-primary">Search</button>
+          <button aria-label="search-button" className="btn btn-primary">
+            Search
+          </button>
         </div>
       </form>
-      <button className="btn btn-text" onClick={clearSearch}>
+      <button
+        aria-label="clear-button"
+        className="btn btn-text"
+        onClick={clearSearch}
+      >
         Clear Search
       </button>
     </div>

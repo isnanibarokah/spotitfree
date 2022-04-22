@@ -10,10 +10,13 @@ import {
 import './App.css';
 import CreatePlaylist from './pages/createplaylist';
 import Login from './pages/login';
+import { RootState } from './redux/store';
 
 
 function App() {
-  const isAuthorized = useSelector((state) => state.auth.isAuthorized);
+  const isAuthorized: boolean = useSelector(
+    (state: RootState) => state.auth.isAuthorized
+  );
 
   return (
     <Router>

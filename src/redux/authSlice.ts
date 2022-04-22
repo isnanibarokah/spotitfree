@@ -1,15 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { User } from '../types/spotify';
 
 interface IInitialState {
   accessToken: string;
   isAuthorized: boolean;
-  user: any;
+  user: User | null;
 }
 
 const initialState: IInitialState = {
   accessToken: '',
   isAuthorized: false,
-  user: {},
+  user: null,
 };
 
 export const authSlice = createSlice({
@@ -23,7 +24,7 @@ export const authSlice = createSlice({
     },
     logout: (state) => {
       state.isAuthorized = false;
-      state.user = {};
+      state.user = null;
       state.accessToken = '';
     },
    },

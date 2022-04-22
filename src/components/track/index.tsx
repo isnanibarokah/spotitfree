@@ -18,10 +18,10 @@ const Track: React.FC<IProps> = ({ url, title, artist, select, toggle }) => {
 
   return (
     <div className="box-Playlist">
-      <img src={url} alt="Track Playlist" />
+      <img src={url} alt="Track Playlist" aria-label="image-track" />
       <div className="box-info">
-        <h3>{title}</h3>
-        <p>{artist}</p>
+        <h3 aria-label="title-track">{title}</h3>
+        <p aria-label="artist-track">{artist}</p>
       </div>
       <button
         className={`btn btn-select ${
