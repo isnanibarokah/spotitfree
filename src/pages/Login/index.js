@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import config from '../../setup/config';
 import { getUserProfile } from '../../setup/fetchApi';
 import { login } from '../../setup/authSlice';
+import { Anchor } from '@mantine/core';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -45,9 +46,9 @@ export default function Login() {
       <p>
         Login to Spotitfree here.
       </p>
-      <a href={getSpotifyLinkAuthorize()} className="btn btn-login">
-        Login
-      </a>
+      <Anchor href={getSpotifyLinkAuthorize()} color="yellow" radius="md" size="md" uppercase>
+        LOGIN
+      </Anchor>
     </div>
   );
 }
