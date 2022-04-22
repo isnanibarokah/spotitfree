@@ -8,8 +8,8 @@ import {
 } from 'react-router-dom';
 
 import './App.css';
-import CreatePlaylist from './pages/CreatePlaylist';
-import Login from './pages/Login';
+import CreatePlaylist from './pages/createplaylist';
+import Login from './pages/login';
 
 
 function App() {

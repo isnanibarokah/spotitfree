@@ -43,10 +43,10 @@ body {
   text-decoration: none;
 }
 
-/* .btn-login {
+.btn-login {
   background-color: sandybrown;
   color: rgb(14, 13, 13);
-} */
+}
 
 .btn-logout{
   background-color: sandybrown;
@@ -154,8 +154,8 @@ hr {
 
 .track-list {
   display: grid;
-  grid-gap: 24px;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   margin: 20px 0;
 }
 

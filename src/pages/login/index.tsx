@@ -3,10 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import config from '../../setup/config';
 import { getUserProfile } from '../../setup/fetchApi';
-import { login } from '../../setup/authSlice';
-import { Anchor } from '@mantine/core';
+import { login } from '../../redux/authSlice';
 
-export default function Login() {
+const Login: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -33,12 +32,10 @@ export default function Login() {
     }
   }, []);
 
-  const getSpotifyLinkAuthorize = () => {
+  const getSpotifyLinkAuthorize: () => string = () => {
     const state = Date.now().toString();
-    // eslint-disable-next-line no-undef
-    const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 
-    return `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=${config.RESPONSE_TYPE}&redirect_uri=${config.REDIRECT_URI}&state=${state}&scope=${config.SPOTIFY_SCOPE}`;
+    return `${config.SPOTIFY_AUTH_URL}?client_id=${config.API_URL}&response_type=${config.RESPONSE_TYPE}&redirect_uri=${config.REDIRECT_URI}&state=${state}&scope=${config.SPOTIFY_SCOPE}`;
   };
 
   return (
@@ -46,9 +43,11 @@ export default function Login() {
       <p>
         Login to Spotitfree here.
       </p>
-      <Anchor href={getSpotifyLinkAuthorize()} color="yellow" radius="md" size="md" uppercase>
-        LOGIN
-      </Anchor>
+      <a href={getSpotifyLinkAuthorize()} className="btn btn-login">
+        Login
+      </a>
     </div>
   );
-}
+};
+
+export default Login;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../setup/authSlice';
+import { logout } from '../../redux/authSlice';
 
-export default function NavigationBar() {
+const NavigationBar: React.FC = () => {
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+  const handleLogout: () => void = () => {
     dispatch(logout());
   };
 
@@ -21,4 +21,6 @@ export default function NavigationBar() {
       </div>
     </nav>
   );
-}
+};
+
+export default NavigationBar;
