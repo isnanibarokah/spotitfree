@@ -51,4 +51,4 @@ Run `npm test` for launches the test runner in the interactive watch mode.
 
 ## Feedback
 
-If you have any feedback, you can create issue(s) [here](https://github.com/isnanibarokah/spotitfree/issues)
+If you have any feedback, you can create issues [here](https://github.com/isnanibarokah/spotitfree/issues)
