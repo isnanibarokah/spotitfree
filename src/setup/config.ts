@@ -1,3 +1,10 @@
+const getHost: () => string = () => {
+  const protocol: string = window.location.protocol;
+  const host: string = window.location.host;
+
+  return `${protocol}//${host}`;
+};
+
 interface IConfig {
     API_URL: string | undefined;
     SPOTIFY_AUTH_URL: string;
@@ -13,7 +20,7 @@ interface IConfig {
     SPOTIFY_BASE_URL: 'https://api.spotify.com/v1',
     SPOTIFY_SCOPE: 'playlist-modify-private',
     RESPONSE_TYPE: 'token',
-    REDIRECT_URI: 'http://localhost:3000',
+    REDIRECT_URI: getHost(),
   };
   
   export default config;
